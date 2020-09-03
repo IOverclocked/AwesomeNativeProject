@@ -1,69 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
-  StyleSheet,
-  Text,
   View,
-  TextInput,
-  TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
 import { uuidv4 } from '../utils';
+import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+
+
+const StyledTextInput = styled.TextInput`
+  border: 1px solid lightblue;
+  padding: 15px;
+  font-size: 20px;
+  color: #000;
+`;
+
+const StyledTouchableOpacity = styled.TouchableOpacity`
+  background-color: lightblue;
+  padding: 15px;
+  border: 5px solid #fff;
+`;
+
+const StyledTextInBtn = styled.Text`
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+`
 
 const AddItem = ({ addItem }) => {
   const [text, setText] = useState('');
+  const inputRef = useRef(null)
 
   const handleChangeText = (textValue) => {
     setText(textValue);
   };
 
-  const handlePressItem = () => {
+  const refreshInput = () => {
+    inputRef.current.blur()
+    inputRef.current.clear()
+  }
+
+  const handlePressItem = (e) => {
+    console.log(e)
     if (!text) {
       Alert.alert('Error', 'Please enter an item', [{ text: 'Ok' }]);
     } else {
-      addItem({ id: uuidv4(), text })
+      addItem({ id: uuidv4(), text });
+      refreshInput()
     }
-  }
+  };
 
   return (
     <View>
-      <TextInput
+      <StyledTextInput
+        ref={inputRef}
         placeholder="Add item..."
-        style={styles.input}
         value={text}
         onChangeText={handleChangeText}
       />
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={handlePressItem}>
-        <Text style={styles.btnText}>
+      <StyledTouchableOpacity onPress={handlePressItem}>
+        <StyledTextInBtn>
           Add Item &nbsp;
           <Icon name="plus" size={20} />
-        </Text>
-      </TouchableOpacity>
+        </StyledTextInBtn>
+      </StyledTouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    borderColor: 'lightblue',
-    borderWidth: 1,
-    padding: 15,
-    fontSize: 20,
-    color: '#000',
-  },
-  btn: {
-    backgroundColor: 'lightblue',
-    padding: 15,
-    borderColor: '#fff',
-    borderWidth: 5,
-  },
-  btnText: {
-    textAlign: 'center',
-    fontSize: 20,
-    color: '#fff',
-  },
-});
 
 export default AddItem;
