@@ -38,6 +38,7 @@ const AddItem = ({ addItem }) => {
   const refreshInput = () => {
     inputRef.current.blur()
     inputRef.current.clear()
+    setText('')
   }
 
   const handlePressItem = (e) => {
