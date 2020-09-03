@@ -1,39 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
+const StyledTouchableOpacity = styled.TouchableOpacity`
+  padding: 15px;
+  background-color: #f8f8f8;
+  border: 1px solid #eee;
+`;
+
+const StyledView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledText = styled.Text`
+  font-size: 20px;
+`;
+
 const ListItem = ({ item, deleteItem }) => {
-  const { id, text} = item
+  const { id, text } = item;
   return (
-    <TouchableOpacity style={styles.listItem}>
-      <View style={styles.listItemView}>
-        <Text style={styles.listItemText}>{text}</Text>
+    <StyledTouchableOpacity>
+      <StyledView>
+        <StyledText>{text}</StyledText>
         <Icon
           name="remove"
           size={20}
           color="firebrick"
           onPress={() => deleteItem(id)}
         />
-      </View>
-    </TouchableOpacity>
+      </StyledView>
+    </StyledTouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  listItem: {
-    padding: 15,
-    backgroundColor: '#f8f8f8',
-    borderBottomWidth: 1,
-    borderColor: '#eee',
-  },
-  listItemView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  listItemText: {
-    fontSize: 20,
-  },
-});
 
 export default ListItem;

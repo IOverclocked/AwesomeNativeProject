@@ -1,29 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import styled from 'styled-components';
+
+const StyledView = styled.View`
+  height: 60px;
+  padding: 15px;
+  background-color: lightblue;
+`;
+
+const StyledText = styled.Text`
+  color: #fff;
+  font-size: 23px;
+  text-align: center;
+`;
 
 const Header = ({ title }) => {
   return (
-    <View style={styles.header}>
-      <Text style={styles.text}>{title}</Text>
-    </View>
+    <StyledView>
+      <StyledText>{title}</StyledText>
+    </StyledView>
   );
 };
 
 Header.defaultProps = {
   title: 'Shopping List',
-}
-
-const styles = StyleSheet.create({
-  header: {
-    height: 60,
-    padding: 15,
-    backgroundColor: 'lightblue',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 23,
-    textAlign: 'center',
-  },
-});
+};
 
 export default Header;

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { uuidv4 } from './utils';
+import styled from 'styled-components'
 import ListItem from './components/ListItem';
 import Header from './components/Header';
 import AddItem from './components/AddItem';
+
+const StyledView = styled.View`
+  flex: 1;
+`
 
 const App = () => {
   const [items, setItems] = useState([
@@ -38,7 +43,7 @@ const App = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <StyledView>
       <Header />
       <AddItem addItem={addItem} />
       <FlatList
@@ -48,14 +53,8 @@ const App = () => {
         )}
         keyExtractor={({ id }) => id}
       />
-    </View>
+    </StyledView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
