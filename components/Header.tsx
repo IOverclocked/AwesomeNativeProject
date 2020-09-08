@@ -14,16 +14,16 @@ const StyledText = styled.Text`
   text-align: center;
 `;
 
-const Header = ({ title }) => {
+interface IProps {
+  title?: string
+}
+
+const Header: React.FC<IProps> = ({ title = 'Shopping List' }) => {
   return (
     <StyledView>
       <StyledText>{title}</StyledText>
     </StyledView>
   );
-};
-
-Header.defaultProps = {
-  title: 'Shopping List',
 };
 
 export default Header;

@@ -14,8 +14,8 @@ const list = [
   { key: 'Julie' },
 ];
 
-const ExampleFlatList = () => {
-  const handleRenderItem = (item) => {
+const ExampleFlatList: React.FC = () => {
+  const handleRenderItem = (item: { key: string }) => {
     return <Text>{item.key}</Text>;
   };
 
@@ -32,7 +32,7 @@ const ExampleFlatList = () => {
         renderSectionHeader={({ section }) => (
           <Text style={{ color: 'red' }}>Section: {section.title}</Text>
         )}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item: string) => item}
       />
     </View>
   );

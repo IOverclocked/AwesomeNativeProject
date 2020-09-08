@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import {
   View,
   Alert,
@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { uuidv4 } from '../utils';
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const StyledTextInput = styled.TextInput`
@@ -30,29 +30,34 @@ const StyledTextInBtn = styled.Text`
   font-size: 20px;
 `
 
-const AddItem = ({ addItem }) => {
-  const [text, setText] = useState('');
-  const inputRef = useRef(null)
+interface IProps {
+  addItem: (item: { id: string, text: string }) => void
+}
 
-  const handleChangeText = (textValue) => {
+const AddItem: React.FC<IProps> = ({ addItem }) => {
+  const [text, setText] = useState<string>('');
+  const inputRef = useRef<TextInput | null>(null);
+
+  const handleChangeText = useCallback((textValue: string): void => {
     setText(textValue);
-  };
+  }, [setText]);
 
-  const refreshInput = () => {
-    inputRef.current.blur()
-    inputRef.current.clear()
-    setText('')
-  }
+  const refreshInput = useCallback((): void => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.blur();
+      inputRef.current.clear();
+    }
+    setText('');
+  }, [inputRef, setText]);
 
-  const handlePressItem = (e) => {
-    console.log(e)
+  const handlePressItem = useCallback((): void => {
     if (!text) {
       Alert.alert('Error', 'Please enter an item', [{ text: 'Ok' }]);
     } else {
       addItem({ id: uuidv4(), text });
       refreshInput()
     }
-  };
+  }, [text, addItem, refreshInput]);
 
   return (
     <View>

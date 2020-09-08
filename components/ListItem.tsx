@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 const StyledTouchableOpacity = styled.TouchableOpacity`
@@ -19,7 +19,12 @@ const StyledText = styled.Text`
   font-size: 20px;
 `;
 
-const ListItem = ({ item, deleteItem }) => {
+interface IProps {
+  item: { id: string, text: string },
+  deleteItem: (id: string) => void
+}
+
+const ListItem: React.FC<IProps> = ({ item, deleteItem }) => {
   const { id, text } = item;
   return (
     <StyledTouchableOpacity>
