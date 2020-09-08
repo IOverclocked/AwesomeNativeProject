@@ -2,9 +2,12 @@ import React, { useState, useRef } from 'react';
 import {
   View,
   Alert,
+  TextInput,
+  TouchableOpacity,
+  Text,
 } from 'react-native';
 import { uuidv4 } from '../utils';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 
@@ -61,7 +64,7 @@ const AddItem = ({ addItem }) => {
       />
       <StyledTouchableOpacity onPress={handlePressItem}>
         <StyledTextInBtn>
-          Add Item &nbsp;
+          Add Item
           <Icon name="plus" size={20} />
         </StyledTextInBtn>
       </StyledTouchableOpacity>

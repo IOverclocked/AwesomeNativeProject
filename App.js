@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FlatList } from 'react-native';
 import { uuidv4 } from './utils';
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import ListItem from './components/ListItem';
 import Header from './components/Header';
 import AddItem from './components/AddItem';
+import ExampleScrollView from './components/ExampleScrollView';
+import ExampleFlatList from './components/ExampleFlatList';
 
 const StyledView = styled.View`
   flex: 1;
@@ -36,14 +38,15 @@ const App = () => {
     });
   };
 
-  const addItem = (item) => {
+  const addItem = useCallback((item) => {
     setItems((prevItems) => {
       return [...prevItems, item];
     });
-  };
+  }, [setItems]);
 
   return (
     <StyledView>
+      {/* crush curse */}
       <Header />
       <AddItem addItem={addItem} />
       <FlatList
@@ -53,6 +56,10 @@ const App = () => {
         )}
         keyExtractor={({ id }) => id}
       />
+
+      {/* Examples from docs */}
+      {/* <ExampleScrollView /> */}
+      {/* <ExampleFlatList /> */}
     </StyledView>
   );
 };

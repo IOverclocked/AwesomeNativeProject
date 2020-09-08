@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import { View, Text } from 'react-native'
+import styled from 'styled-components/native';
 
 const StyledView = styled.View`
   height: 60px;

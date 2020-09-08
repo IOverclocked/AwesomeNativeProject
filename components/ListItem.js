@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 const StyledTouchableOpacity = styled.TouchableOpacity`
   padding: 15px;
