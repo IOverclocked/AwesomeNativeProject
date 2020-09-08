@@ -13,7 +13,7 @@ const StyledView = styled.View`
 `
 
 const App = () => {
-  const [items, setItems] = useState([
+  const [items, setItems] = useState <{ id: string, text: string }[]>([
     {
       id: uuidv4(),
       text: 'Milk',
@@ -32,13 +32,13 @@ const App = () => {
     },
   ]);
 
-  const deleteItem = (id) => {
+  const deleteItem = useCallback((id: string): void => {
     setItems((prevItems) => {
       return prevItems.filter((item) => item.id !== id);
     });
-  };
+  }, [setItems]);
 
-  const addItem = useCallback((item) => {
+  const addItem = useCallback((item): void => {
     setItems((prevItems) => {
       return [...prevItems, item];
     });
